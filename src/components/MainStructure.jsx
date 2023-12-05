@@ -7,14 +7,16 @@ import PortalAnimation from "./PortalAnimation"
 import SearchInput from "./SearchInput"
 import ErrorTooltip from "./ErrorTooltip"
 import usePagination from "../hooks/usePagination"
+import SwitchInput from "./SwitchInput"
+import SearchByName from "./SearchByName"
 
 const MainStructure = () => {
   const [valueSearch, setValueSearch] = useState(GetRandom(126))
   const [errorNotification, setErrorNotification] = useState(false)
+  const [searchSwitch, setSearchSwitch] = useState(true)
   const { endpoint, residents, error1} = useFetch(`https://rickandmortyapi.com/api/location/${valueSearch}`)
   const { currentPage, setCurrentPage, totalPages, nextPage, prevPage, currentDisplay } = usePagination(residents)
-
-
+  
   const handlePageNumber = (e) => {
     setCurrentPage(Number(e.target.textContent))
   }
@@ -36,7 +38,11 @@ const MainStructure = () => {
   return (
     <main className="min-h-screen w-full text-white flex flex-col items-center font-Fira">
       <PortalAnimation />
+      <SwitchInput setSearchSwitch={setSearchSwitch} searchSwitch={searchSwitch}/>
+      {searchSwitch ? 
+      <SearchByName setValueSearch={setValueSearch} setErrorNotification={setErrorNotification}/> :
       <SearchInput setValueSearch={setValueSearch} setErrorNotification={setErrorNotification}/>
+      }
       <ErrorTooltip errorNotification={errorNotification}/>
       <Location endpoint={endpoint} />
       <article className="max-w-7xl grid grid-cols-2 gap-28 max-lg:grid-cols-1 max-lg:gap-14">
