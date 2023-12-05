@@ -1,0 +1,25 @@
+.tooltiptext {
+    min-width: 200px;
+    background: transparent;
+    color: #282828;
+    text-align: center;
+    border-radius: 2px;
+    padding: 5px 10px;
+    transform: translateY(-100%);
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: -1;
+}
+
+.show.tooltiptext {
+    background-color: #ff8b8b;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+@media (width < 600px){
+    .tooltiptext {
+        width: 300px;
+    }
+}
