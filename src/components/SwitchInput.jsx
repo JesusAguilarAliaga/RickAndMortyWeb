@@ -15,7 +15,7 @@ const SwitchInput = ({ setSearchSwitch, searchSwitch }) => {
   }, [searchSwitch]);
 
   return (
-    <div className="absolute mt-[450px] max-lg:mt-[280px] max-sm:mt-[220px]">
+    <div className="absolute mt-[450px] max-lg:mt-[280px] max-sm:mt-[230px]">
       <input
         type="checkbox"
         name="check-toggle"

@@ -13,8 +13,9 @@ import SearchByName from "./SearchByName"
 const MainStructure = () => {
   const [valueSearch, setValueSearch] = useState(GetRandom(126))
   const [errorNotification, setErrorNotification] = useState(false)
+  const [errorText, setErrorText] = useState("")
   const [searchSwitch, setSearchSwitch] = useState(true)
-  const { endpoint, residents, error1} = useFetch(`https://rickandmortyapi.com/api/location/${valueSearch}`)
+  const { endpoint, residents} = useFetch(`https://rickandmortyapi.com/api/location/${valueSearch}`)
   const { currentPage, setCurrentPage, totalPages, nextPage, prevPage, currentDisplay } = usePagination(residents)
   
   const handlePageNumber = (e) => {
@@ -40,10 +41,10 @@ const MainStructure = () => {
       <PortalAnimation />
       <SwitchInput setSearchSwitch={setSearchSwitch} searchSwitch={searchSwitch}/>
       {searchSwitch ? 
-      <SearchByName setValueSearch={setValueSearch} setErrorNotification={setErrorNotification}/> :
-      <SearchInput setValueSearch={setValueSearch} setErrorNotification={setErrorNotification}/>
+      <SearchByName setValueSearch={setValueSearch} setErrorNotification={setErrorNotification} setErrorText={setErrorText}/> :
+      <SearchInput setValueSearch={setValueSearch} setErrorNotification={setErrorNotification} setErrorText={setErrorText}/>
       }
-      <ErrorTooltip errorNotification={errorNotification}/>
+      <ErrorTooltip errorNotification={errorNotification} errorText={errorText}/>
       <Location endpoint={endpoint} />
       <article className="max-w-7xl grid grid-cols-2 gap-28 max-lg:grid-cols-1 max-lg:gap-14">
         {currentDisplay.map((resident) => (
